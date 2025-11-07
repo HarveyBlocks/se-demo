@@ -1,5 +1,6 @@
 package com.harvey.se.pojo.dto;
 
+import com.harvey.se.pojo.entity.Gift;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -34,5 +35,18 @@ public class GiftInfoDto {
     private String pictureUrl2;
     @ApiModelProperty(value = "用于详情图片的URL3", required = true)
     private String pictureUrl3;
+
+    public GiftInfoDto(Gift entity) {
+        this(
+                entity.getId(),
+                entity.getCost(),
+                entity.getTitle(),
+                entity.getDescription(),
+                entity.getStorage(),
+                entity.getPictureUrl1(),
+                entity.getPictureUrl2(),
+                entity.getPictureUrl3()
+        );
+    }
 }
 

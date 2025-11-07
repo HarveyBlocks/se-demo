@@ -1,5 +1,7 @@
 package com.harvey.se.pojo.dto;
 
+import com.harvey.se.pojo.entity.ConsultationContent;
+import com.harvey.se.pojo.entity.User;
 import com.harvey.se.pojo.enums.UserRole;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * TODO
@@ -20,7 +23,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(description = "用户的信息及其咨询信息")
-public class ConsultationContentWithUserDto {
+public class ConsultationContentWithUserEntityDto {
     @ApiModelProperty(value = "持有这个咨询信息的用户, 系统自动分配, 但其为null时表示此信息为默认信息")
     private Long userId;
     /**
@@ -71,4 +74,45 @@ public class ConsultationContentWithUserDto {
 
     @ApiModelProperty(value = "其他要求, 默认(无)")
     private String otherRequirements;
+
+
+    public static ConsultationContentWithUserEntityDto instance(
+            ConsultationContent consultationContent, User user) {
+        return Objects.equals(consultationContent.getUserId(), user.getId()) ? new ConsultationContentWithUserEntityDto(
+                user.getId(),
+                user.getPhone(),
+                user.getNickname(),
+                user.getPoints(),
+                user.getCreateTime(),
+                user.getUpdateTime(),
+                user.getRole(),
+                consultationContent.getLowerBound(),
+                consultationContent.getUpperBound(),
+                consultationContent.getPreferredCarModel(),
+                consultationContent.getMainUseCase(),
+                consultationContent.getPreferredFuelType(),
+                consultationContent.getPreferredBrand(),
+                consultationContent.getOtherRequirements()
+        ) : null;
+    }
+
+    public static ConsultationContentWithUserEntityDto instance(
+            ConsultationContentDto consultationContent, UserEntityDto user) {
+        return Objects.equals(consultationContent.getUserId(), user.getId()) ? new ConsultationContentWithUserEntityDto(
+                user.getId(),
+                user.getPhone(),
+                user.getNickname(),
+                user.getPoints(),
+                user.getCreateTime(),
+                user.getUpdateTime(),
+                user.getRole(),
+                consultationContent.getLowerBound(),
+                consultationContent.getUpperBound(),
+                consultationContent.getPreferredCarModel(),
+                consultationContent.getMainUseCase(),
+                consultationContent.getPreferredFuelType(),
+                consultationContent.getPreferredBrand(),
+                consultationContent.getOtherRequirements()
+        ) : null;
+    }
 }

@@ -1,5 +1,6 @@
 package com.harvey.se.pojo.dto;
 
+import com.harvey.se.pojo.entity.UserActionLog;
 import com.harvey.se.properties.ConstantsProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -43,4 +44,16 @@ public class UserActionLogDto {
 
     @ApiModelProperty(value = "响应时间损耗, 单位ms")
     private Integer requestTimeCost;
+
+    public UserActionLogDto(UserActionLog entity) {
+        this(
+                entity.getId(),
+                entity.getUserId(),
+                entity.getIpAddress(),
+                entity.getRequestUrl(),
+                entity.getRequestMethod(),
+                entity.getRequestTime(),
+                entity.getRequestTimeCost()
+        );
+    }
 }

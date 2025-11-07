@@ -73,4 +73,16 @@ public class UserEntityDto {
                 user.getRole()
         );
     }
+
+    public UserEntityDto(ConsultationContentWithUserEntityDto withConsultationContentDto) {
+        this(
+                withConsultationContentDto.getUserId(),
+                withConsultationContentDto.getPhone(),
+                withConsultationContentDto.getNickname(),
+                withConsultationContentDto.getPoints(),
+                withConsultationContentDto.getCreateTime(),
+                withConsultationContentDto.getUpdateTime(),
+                withConsultationContentDto.getRole()
+        );
+    }
 }

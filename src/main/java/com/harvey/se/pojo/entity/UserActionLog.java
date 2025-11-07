@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.harvey.se.pojo.dto.UserActionLogDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,4 +47,16 @@ public class UserActionLog {
 
     @TableField("request_time_cost")
     private Integer requestTimeCost;
+
+    public UserActionLog(UserActionLogDto dto) {
+        this(
+                dto.getId(),
+                dto.getUserId(),
+                dto.getIpAddress(),
+                dto.getRequestUrl(),
+                dto.getRequestMethod(),
+                dto.getRequestTime(),
+                dto.getRequestTimeCost()
+        );
+    }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.harvey.se.pojo.dto.ConsultationContentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,4 +42,20 @@ public class ConsultationContent {
     private String preferredBrand;
     @TableField("other_requirements")
     private String otherRequirements;
+
+
+    public ConsultationContent(ConsultationContentDto dto) {
+        this(
+                dto.getUserId(),
+                dto.getLowerBound(),
+                dto.getUpperBound(),
+                dto.getPreferredCarModel(),
+                dto.getMainUseCase(),
+                dto.getPreferredFuelType(),
+                dto.getPreferredBrand(),
+                dto.getOtherRequirements()
+        );
+    }
+
+
 }

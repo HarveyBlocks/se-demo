@@ -3,6 +3,7 @@ package com.harvey.se.pojo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.harvey.se.pojo.dto.HotWordDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,4 +30,8 @@ public class HotWord {
     private String word;
 
     private Integer frequency;
+
+    public HotWord(HotWordDto dto) {
+        this(dto.getId(), dto.getWord(), dto.getFrequency());
+    }
 }

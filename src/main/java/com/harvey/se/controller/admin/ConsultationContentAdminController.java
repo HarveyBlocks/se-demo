@@ -2,7 +2,7 @@ package com.harvey.se.controller.admin;
 
 import com.harvey.se.exception.UncompletedException;
 import com.harvey.se.pojo.dto.ConsultationContentDto;
-import com.harvey.se.pojo.dto.ConsultationContentWithUserDto;
+import com.harvey.se.pojo.dto.ConsultationContentWithUserEntityDto;
 import com.harvey.se.pojo.dto.HotWordDto;
 import com.harvey.se.pojo.vo.Result;
 import com.harvey.se.properties.ConstantsProperties;
@@ -60,7 +60,7 @@ public class ConsultationContentAdminController {
 
     @GetMapping(value = "/both/{id}")
     @ApiOperation(value = "依据某一用户的ID查询该用户的用户信息和购车咨询信息")
-    public Result<ConsultationContentWithUserDto> bothById(
+    public Result<ConsultationContentWithUserEntityDto> bothById(
             @PathVariable(value = "id") @ApiParam("用户id") Long userId) {
         // 不提供就使用默认值
         throw new UncompletedException("依据用户id查询购车咨询+用户信息");
@@ -70,7 +70,7 @@ public class ConsultationContentAdminController {
     @GetMapping(value = "/both/all/{limit}/{page}")
     @ApiOperation(value = "分页查询用户咨询")
     @ApiResponse(message = "包含用户信息和咨询信息", code = 200)
-    public Result<List<ConsultationContentWithUserDto>> bothByPage(
+    public Result<List<ConsultationContentWithUserEntityDto>> bothByPage(
             @PathVariable(value = "limit", required = false)
             @ApiParam(value = "页长", defaultValue = ConstantsProperties.DEFAULT_PAGE_SIZE) String limit,
             @PathVariable(value = "page", required = false) @ApiParam(value = "页号", defaultValue = "1") String page) {

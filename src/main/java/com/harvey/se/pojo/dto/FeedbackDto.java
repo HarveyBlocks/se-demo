@@ -1,5 +1,6 @@
 package com.harvey.se.pojo.dto;
 
+import com.harvey.se.pojo.entity.Feedback;
 import com.harvey.se.properties.ConstantsProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -35,4 +36,8 @@ public class FeedbackDto {
 
     @ApiModelProperty(value = "是否已读")
     private Boolean read;
+
+    public FeedbackDto(Feedback entity) {
+        this(entity.getId(), entity.getUserId(), entity.getText(), entity.getCreateTime(), entity.getRead());
+    }
 }

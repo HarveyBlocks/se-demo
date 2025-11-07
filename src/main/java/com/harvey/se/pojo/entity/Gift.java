@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.harvey.se.pojo.dto.GiftInfoDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,4 +37,17 @@ public class Gift {
     private String pictureUrl2;
     @TableField("picture_url3")
     private String pictureUrl3;
+
+    public Gift(GiftInfoDto dto) {
+        this(
+                dto.getId(),
+                dto.getCost(),
+                dto.getTitle(),
+                dto.getDescription(),
+                dto.getStorage(),
+                dto.getPictureUrl1(),
+                dto.getPictureUrl2(),
+                dto.getPictureUrl3()
+        );
+    }
 }

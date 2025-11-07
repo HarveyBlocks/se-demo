@@ -1,5 +1,6 @@
 package com.harvey.se.pojo.dto;
 
+import com.harvey.se.pojo.entity.ConsultationContent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -44,4 +45,30 @@ public class ConsultationContentDto {
 
     @ApiModelProperty(value = "其他要求, 默认(无)")
     private String otherRequirements;
+
+    public ConsultationContentDto(ConsultationContentWithUserEntityDto withUserDto) {
+        this(
+                withUserDto.getUserId(),
+                withUserDto.getLowerBound(),
+                withUserDto.getUpperBound(),
+                withUserDto.getPreferredCarModel(),
+                withUserDto.getMainUseCase(),
+                withUserDto.getPreferredFuelType(),
+                withUserDto.getPreferredBrand(),
+                withUserDto.getOtherRequirements()
+        );
+    }
+
+    public ConsultationContentDto(ConsultationContent entity) {
+        this(
+                entity.getUserId(),
+                entity.getLowerBound(),
+                entity.getUpperBound(),
+                entity.getPreferredCarModel(),
+                entity.getMainUseCase(),
+                entity.getPreferredFuelType(),
+                entity.getPreferredBrand(),
+                entity.getOtherRequirements()
+        );
+    }
 }

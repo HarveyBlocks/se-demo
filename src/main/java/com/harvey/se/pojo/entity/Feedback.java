@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.harvey.se.pojo.dto.FeedbackDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,4 +41,14 @@ public class Feedback {
 
     @TableField("read")
     private Boolean read;
+
+    public Feedback(FeedbackDto dto) {
+        this(
+                dto.getId(),
+                dto.getUserId(),
+                dto.getText(),
+                dto.getCreateTime(),
+                dto.getRead()
+        );
+    }
 }
