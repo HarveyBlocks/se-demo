@@ -1,5 +1,6 @@
 package com.harvey.se.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -43,5 +44,28 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
                     .orderByDesc(Feedback::getCreateTime, (SFunction<Feedback, ?>[]) null);
         }
         return wrapper.page(page).getRecords().stream().map(FeedbackDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FeedbackDto> queryFeedback(Long userId, Page<Feedback> page, boolean read) {
+        return new LambdaQueryChainWrapper<>(this.baseMapper)
+                .eq(Feedback::getUserId, userId)
+                .eq(Feedback::getRead, read)
+                .page(page)
+                .getRecords()
+                .stream()
+                .map(FeedbackDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void read(Long id) {
+        LambdaUpdateWrapper<Feedback> updateWrapper = new LambdaUpdateWrapper<Feedback>().set(
+                        Feedback::getRead, true) // 已读
+                .eq(Feedback::getId, id);
+        boolean updated = super.update(updateWrapper);
+        if (!updated) {
+            log.warn("未成功更新read");
+        }
     }
 }

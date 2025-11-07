@@ -1,7 +1,6 @@
 package com.harvey.se.controller.admin;
 
 import com.harvey.se.exception.BadRequestException;
-import com.harvey.se.exception.UncompletedException;
 import com.harvey.se.pojo.dto.FeedbackDto;
 import com.harvey.se.pojo.vo.DateRange;
 import com.harvey.se.pojo.vo.Null;
@@ -96,14 +95,17 @@ public class AdminFeedbackController {
     @GetMapping(value = "/user/{user-id}/{read}/{limit}/{page}")
     @ApiOperation("查询某一个特定用户的反馈")
     public Result<List<FeedbackDto>> getByUserId(
-            @PathVariable(value = "user-id", required = true) @ApiParam(value = "用户id", required = true) Long userId,
+            @PathVariable(value = "user-id") @ApiParam(value = "用户id", required = true) Long userId,
             @PathVariable(value = "read", required = false) @ApiParam(value = "默认null, 表示两个都查") Boolean read,
             @PathVariable(value = "limit", required = false)
             @ApiParam(value = "页长", defaultValue = ServerConstants.DEFAULT_PAGE_SIZE) Integer limit,
             @PathVariable(value = "page", required = false) @ApiParam(value = "页号", defaultValue = "1")
             Integer page) {
-        // 对某条反馈已读
-        throw new UncompletedException("将反馈标记为已读");
+        return new Result<>(feedbackService.queryFeedback(
+                userId,
+                constantsInitializer.initPage(page, limit),
+                false
+        ));
     }
 
 
@@ -112,6 +114,7 @@ public class AdminFeedbackController {
     public Result<Null> read(
             @RequestBody @ApiParam(value = "在body里面简单的就是一个id, 不需要键值对", required = true) Long id) {
         // 对某条反馈已读
-        throw new UncompletedException("将反馈标记为已读");
+        feedbackService.read(id);
+        return Result.ok();
     }
 }

@@ -15,4 +15,8 @@ import java.util.List;
  */
 public interface FeedbackService extends IService<Feedback> {
     List<FeedbackDto> queryFeedback(DateRange dateRange, Page<Feedback> page, boolean read);
+
+    List<FeedbackDto> queryFeedback(Long userId, Page<Feedback> page, boolean read);
+
+    void read(Long id);
 }

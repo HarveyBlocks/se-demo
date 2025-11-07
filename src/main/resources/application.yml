@@ -67,9 +67,13 @@ h-se:
       - "/user/logout"
       - "/user/me"
       - "/user/update"
-      - "/user/admin/**"
+      - "/consultation-content/**"
+      - "/feedback/**"
+      - "/gift/consume"
+      - "/robot/**"
+      - "/admin/**"
     root-auth-paths:
-      - "/user/admin/**"
+      - "/admin/**"
   constants:
     authorization-header: "authorization"
     redis-host: ${h-se.redis.host}
