@@ -22,7 +22,7 @@ public class HotWordDto {
     private Long id;
 
     @ApiModelProperty(value = "热词")
-    private String hotWord;
+    private String word;
 
     @ApiModelProperty(value = "频率")
     private Integer frequency;

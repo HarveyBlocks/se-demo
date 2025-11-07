@@ -1,11 +1,16 @@
 package com.harvey.se.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 /**
  * TODO 咨询内容
@@ -21,5 +26,18 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Feedback {
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
+
+    @TableField("user_id")
+    private Long userId;
+
+    @TableField("text")
+    private String text;
+
+    @TableField("create_time")
+    private Date createTime;
+
+    @TableField("read")
+    private Boolean read;
 }

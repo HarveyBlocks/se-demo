@@ -34,5 +34,5 @@ public class FeedbackDto {
     private Date createTime;
 
     @ApiModelProperty(value = "是否已读")
-    private boolean read;
+    private Boolean read;
 }

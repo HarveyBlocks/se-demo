@@ -42,5 +42,5 @@ public class UserActionLogDto {
     private Date requestTime;
 
     @ApiModelProperty(value = "响应时间损耗, 单位ms")
-    private Date requestTimeCost;
+    private Integer requestTimeCost;
 }

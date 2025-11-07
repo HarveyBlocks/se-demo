@@ -1,5 +1,8 @@
 package com.harvey.se.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +24,21 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConsultationContent {
-    private Long id;
+    @TableField("user_id")
+    @TableId(type = IdType.INPUT)
+    private Long userId;
+    @TableField("lower_bound")
+    private Integer lowerBound;
+    @TableField("upper_bound")
+    private Integer upperBound;
+    @TableField("preferred_car_model")
+    private String preferredCarModel;
+    @TableField("main_use_case")
+    private String mainUseCase;
+    @TableField("preferred_fuel_type")
+    private String preferredFuelType;
+    @TableField("preferred_brand")
+    private String preferredBrand;
+    @TableField("other_requirements")
+    private String otherRequirements;
 }
