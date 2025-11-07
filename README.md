@@ -6,3 +6,4 @@
 
 [API接口调用-测试-回声服务器(http://47.96.191.232:8080/api/hello/echo/URL上的回声文本)](http://47.96.191.232:8080/api/hello/echo/URL上的回声文本)
 
+[Controller文件夹下是有关API的内容](./src/main/java/com/harvey/se/controller/admin)
