@@ -15,6 +15,53 @@ create table tb_user
 alter table tb_user
     add points int4 not null check ( points >= 0 ) default 0 comment '积分';
 
+
+create table tb_consultation_content
+(
+    user_id             int8 primary key                not null,
+    lower_bound         int4 check ( lower_bound >= 0 ) not null default 0,
+    upper_bound         int4                            not null default 2147483647 comment 'check ( upper_bound >= lower_bound )',
+    preferred_car_model varchar(63)                     not null default '任意',
+    main_use_case       varchar(63)                     not null default '任意',
+    preferred_fuel_type varchar(63)                     not null default '任意',
+    preferred_brand     varchar(63)                     not null default '任意',
+    other_requirements  varchar(255)                    not null default '',
+    constraint tb_consultation_content_user_id_fk foreign key (user_id) references tb_user (id)
+) comment '咨询内容';
+
+
+create table tb_feedback
+(
+    id          int8 primary key not null,
+    user_id     int8             not null default 0,
+    text        varchar(255)     not null default '',
+    `read`      bool             not null default false comment '已读',
+    create_time datetime         not null default NOW(),
+    constraint tb_feedback_user_id_fk foreign key (user_id) references tb_user (id)
+) comment '反馈';
+
+create table tb_hot_word
+(
+    id        int8 primary key not null,
+    word      varchar(63)      not null,
+    frequency int4             not null default 1
+) comment '热词';
+
+
+create table tb_user_action_log
+(
+    id                int8 primary key not null,
+    user_id           int8             not null,
+    ip_address        char(32)         not null,
+    request_url       varchar(255)     not null,
+    request_method    char(8) check ( request_method in ('GET', 'POST', 'PUT', 'DELETE'))
+                                       not null,
+    request_time      datetime         not null,
+    request_time_cost int4             not null comment '单位ms',
+    constraint tb_user_action_log_user_id_fk foreign key (user_id) references tb_user (id)
+) comment '用户行为日志';
+
+-- 下面的不启用
 create table tb_item
 (
     id          int8                    not null primary key comment '主键',
