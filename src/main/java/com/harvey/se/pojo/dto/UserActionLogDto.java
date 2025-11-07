@@ -56,4 +56,5 @@ public class UserActionLogDto {
                 entity.getRequestTimeCost()
         );
     }
+
 }
