@@ -1,0 +1,24 @@
+### 查询自己的
+GET http://{{host}}:8080/consultation-content/me
+Content-Type: application/json
+authorization: {{authorization}}
+Accept-Encoding: UTF-8
+
+
+
+### 更新自己的
+PUT http://{{host}}:8080/consultation-content/update
+Content-Type: application/json
+authorization: {{authorization}}
+Accept-Encoding: UTF-8
+
+{
+  "userId": null,
+  "lowerBound": 200,
+  "upperBound": null,
+  "preferredCarModel": "任意",
+  "mainUseCase": "任意",
+  "preferredFuelType": "氢气",
+  "preferredBrand": "任意",
+  "otherRequirements": "无"
+}

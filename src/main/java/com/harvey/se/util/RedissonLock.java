@@ -1,6 +1,7 @@
 package com.harvey.se.util;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.function.Supplier;
  * @date 2024-01-21 21:20
  */
 @Component
+@Slf4j
 public class RedissonLock<T> {
     @Resource
     private RedissonClient redissonClient;
@@ -36,7 +38,7 @@ public class RedissonLock<T> {
      * @return id
      */
     public T asynchronousLock(String lockKey, Supplier<T> supply) throws InterruptedException {
-
+        log.debug("will lock : {}", lockKey);
         // 获取锁(可重入)
         RLock lock = redissonClient.getLock(lockKey);
         // 尝试获取锁, 参数分别为: 获取锁的最大等待时间(期间会重试),锁自动释放时间, 时间单位

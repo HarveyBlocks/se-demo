@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * TODO
+ * 简化Service的方法, 提高复用率
  *
  * @author <a href="mailto:harvey.blocks@outlook.com">Harvey Blocks</a>
  * @version 1.0

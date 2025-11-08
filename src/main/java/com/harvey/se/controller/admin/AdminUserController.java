@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * TODO
+ * 管理员管理用户信息
  *
  * @author <a href="mailto:harvey.blocks@outlook.com">Harvey Blocks</a>
  * @version 1.0
@@ -73,17 +73,14 @@ public class AdminUserController {
     /**
      * UserController 根据id查询用户Entity
      */
-    @GetMapping("/all/{limit}/{page}")
+    @GetMapping({"/all/{limit}/{page}", "/all/{limit}", "/all"})
     @ApiOperation("分页查询用户")
     public Result<List<UserInfoDto>> queryUserEntityByPage(
             @PathVariable(value = "limit", required = false) @ApiParam(value = "页号,从1开始", defaultValue = "1")
             Integer limit,
             @PathVariable(value = "page", required = false)
             @ApiParam(value = "页长", defaultValue = ServerConstants.DEFAULT_PAGE_SIZE) Integer page) {
-        List<UserInfoDto> userInfoDto = userService.queryUserEntityByPage(constantsInitializer.initPage(
-                page,
-                limit
-        ));
+        List<UserInfoDto> userInfoDto = userService.queryUserEntityByPage(constantsInitializer.initPage(page, limit));
         return new Result<>(userInfoDto);
     }
 

@@ -64,7 +64,7 @@ public class ConsultationContentAdminController {
         return new Result<>(consultationContentService.queryByUser(userId));
     }
 
-    @GetMapping(value = "/all/{limit}/{page}")
+    @GetMapping({"/all/{limit}/{page}", "/all/{limit}", "/all"})
     @ApiOperation(value = "分页查询用户咨询")
     public Result<List<ConsultationContentDto>> consultation(
             @PathVariable(value = "limit", required = false)
@@ -87,7 +87,7 @@ public class ConsultationContentAdminController {
     }
 
 
-    @GetMapping(value = "/both/all/{limit}/{page}")
+    @GetMapping({"/both/all/{limit}/{page}", "/both/all/{limit}", "/both/all"})
     @ApiOperation(value = "分页查询用户咨询")
     @ApiResponse(message = "包含用户信息和咨询信息", code = 200)
     public Result<List<ConsultationContentWithUserEntityDto>> bothByPage(

@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TODO
+ * 对积分的一些操作
  *
  * @author <a href="mailto:harvey.blocks@outlook.com">Harvey Blocks</a>
  * @version 1.0
@@ -29,7 +29,7 @@ public class PointServiceImpl implements PointService {
         // 1. 检查缓存, 是否已经加过分
         String flagKey = keyPre + user.getId();
         boolean hasKeys = Boolean.TRUE.equals(stringRedisTemplate.hasKey(flagKey));
-        if (!hasKeys) {
+        if (hasKeys) {
             return;
         }
         // 2. 增加缓存标记

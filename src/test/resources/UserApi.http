@@ -1,0 +1,14 @@
+### 登录
+POST http://{{host}}:8080/user/login
+Content-Type: application/json
+
+{
+  "code": "",
+  "password": "EmiyaShirou",
+  "phone": "18906901236"
+}
+
+### 查自己
+GET http://{{host}}:8080/user/me
+Content-Type: application/json
+authorization: {{authorization}}

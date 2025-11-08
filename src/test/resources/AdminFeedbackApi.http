@@ -1,0 +1,85 @@
+### 查询所有
+GET http://{{host}}:8080/gift/all
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+
+### 分页查询-limit
+< {%
+    request.variables.set("limit", "2")
+%}
+GET http://{{host}}:8080/gift/all/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询-limit-page
+< {%
+    request.variables.set("limit", "2")
+    request.variables.set("page", "2")
+%}
+GET http://{{host}}:8080/gift/all/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 消费
+PUT http://{{host}}:8080/gift/consume/
+Content-Type: application/json
+authorization: {{authorization}}
+
+0
+
+### 依据花费分页查询
+GET http://{{host}}:8080/gift/cost-in-range
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+### 依据花费分页查询-lower
+< {%
+    request.variables.set("lower", "100")
+%}
+GET http://{{host}}:8080/gift/cost-in-range/{{lower}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 依据花费分页查询-lower-upper
+< {%
+    request.variables.set("lower", "0")
+    request.variables.set("upper", "100")
+%}
+GET http://{{host}}:8080/gift/cost-in-range/{{lower}}/{{upper}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 依据花费分页查询-lower-upper-limit
+< {%
+    request.variables.set("lower", "0")
+    request.variables.set("upper", "100")
+    request.variables.set("limit", "2")
+%}
+GET http://{{host}}:8080/gift/cost-in-range/{{lower}}/{{upper}}/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 依据花费分页查询-lower-upper-limit-page
+< {%
+    request.variables.set("lower", "0")
+    request.variables.set("upper", "100")
+    request.variables.set("limit", "2")
+    request.variables.set("page", "1")
+%}
+GET http://{{host}}:8080/gift/cost-in-range/{{lower}}/{{upper}}/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 查询细节信息
+< {%
+    request.variables.set("id", "0")
+%}
+GET http://{{host}}:8080/gift/detail/{{id}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+

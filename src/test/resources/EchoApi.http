@@ -1,0 +1,14 @@
+### 测试点一
+< {%
+    request.variables.set("message", "hello word")
+%}
+GET http://{{host}}:8080/hello/echo/{{message}}
+
+
+### 测试点二
+< {%
+    request.variables.set("message2", "Hi")
+%}
+
+GET http://{{host}}:8080/hello/echo/{{message2}}
+authorization: {{authorization}}

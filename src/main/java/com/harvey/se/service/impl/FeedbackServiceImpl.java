@@ -1,7 +1,7 @@
 package com.harvey.se.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.harvey.se.dao.FeedbackMapper;
@@ -52,12 +52,11 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
 
     @Override
     public void read(Long id) {
-        LambdaUpdateWrapper<Feedback> updateWrapper = new LambdaUpdateWrapper<Feedback>().set(
+        boolean updated = new LambdaUpdateChainWrapper<>(baseMapper).set(
                         Feedback::getRead,
                         true
                 ) // 已读
-                .eq(Feedback::getId, id);
-        boolean updated = super.update(updateWrapper);
+                .eq(Feedback::getId, id).update();
         if (!updated) {
             log.warn("未成功更新read");
         }

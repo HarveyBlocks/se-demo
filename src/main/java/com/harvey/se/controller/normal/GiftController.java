@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * TODO 奖品功能, 展示奖品
+ * 奖品功能, 展示奖品
  *
  * @author <a href="mailto:harvey.blocks@outlook.com">Harvey Blocks</a>
  * @version 1.0
@@ -39,7 +39,7 @@ public class GiftController {
     @Resource
     private ConstantsInitializer constantsInitializer;
 
-    @GetMapping(value = "/all/{limit}/{page}")
+    @GetMapping(value = {"/all/{limit}/{page}", "/all/{limit}", "/all"})
     @ApiOperation("分页查询Gift的简略信息")
     @ApiResponse(code = 200, message = "按照id升序")
     public Result<List<GiftDto>> queryAll(
@@ -48,19 +48,18 @@ public class GiftController {
             @PathVariable(value = "page", required = false) @ApiParam(value = "页号", defaultValue = "1")
             Integer page) {
         // 不提供就使用默认值
-        return new Result<>(giftService.queryByPage(
-                constantsInitializer.initPage(page, limit)
-        ));
+        return new Result<>(giftService.queryByPage(constantsInitializer.initPage(page, limit)));
     }
 
-    @GetMapping(value = "/cost-in-range/{lower}/{upper}/{limit}/{page}")
+    @GetMapping(value = {"/cost-in-range/{lower}/{upper}/{limit}/{page}", "/cost-in-range/{lower}/{upper}/{limit}",
+            "/cost-in-range/{lower}/{upper}", "/cost-in-range/{lower}", "/cost-in-range",})
     @ApiOperation("用预算的上下限来计算, 分页查询Gift的简略信息")
     @ApiResponse(code = 200, message = "使用升序排序")
     public Result<List<GiftDto>> queryCostInRange(
             @PathVariable(value = "lower", required = false)
             @ApiParam(value = "商品花费积分下限(包含)", defaultValue = "0") Integer lower,
-            @PathVariable(value = "upper", required = false)
-            @ApiParam(value = "商品花费积分上限(包含)", defaultValue = "null, 表示无限") Integer upper,
+            @PathVariable(value = "upper", required = false) @ApiParam(value = "商品花费积分上限(包含), null表示无限大")
+            Integer upper,
             @PathVariable(value = "limit", required = false)
             @ApiParam(value = "页长", defaultValue = ServerConstants.DEFAULT_PAGE_SIZE) Integer limit,
             @PathVariable(value = "page", required = false) @ApiParam(value = "页号", defaultValue = "1")

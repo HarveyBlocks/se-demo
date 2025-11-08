@@ -156,6 +156,7 @@ public class UserController {
             throw new RuntimeException(e);
         }
         if (userDTO == null) {
+            log.warn("request null");
             throw new ResourceNotFountException("用户" + userId + "不存在");
         }
         return new Result<>(userDTO);

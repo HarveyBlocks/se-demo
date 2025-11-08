@@ -41,7 +41,8 @@ public class UserActionLogController {
     @Resource
     private ConstantsInitializer constantsInitializer;
 
-    @GetMapping(value = "/cost/{longer-than}/{limit}/{page}")
+    @GetMapping(value = {"/cost/{longer-than}/{limit}/{page}", "/cost/{longer-than}/{limit}", "/cost/{longer-than}",
+            "/cost"})
     @ApiOperation("查询请求消耗时间大于某段时长的请求记录")
     @ApiResponse(code = 200, message = "返回在从花费长到花费短")
     public Result<List<UserActionLogDto>> longCost(
@@ -57,13 +58,14 @@ public class UserActionLogController {
     }
 
 
-    @GetMapping(value = "/request-time-latest/{time-from}/{time-to}/{limit}/{page}")
+    @GetMapping(value = {"/request-time-latest/{time-from}/{time-to}/{limit}/{page}",
+            "/request-time-latest/{time-from}/{time-to}/{limit}", "/request-time-latest/{time-from}/{time-to}",
+            "/request-time-latest/{time-from}", "/request-time-latest",})
     @ApiOperation("查询一定时间内的用户行为日志")
     @ApiResponse(code = 200, message = "按照时间排序, 返回的时间顺序和参数的from-to一致")
     public Result<List<UserActionLogDto>> getLatestActionByRequestTimeRange(
             @PathVariable(value = "time-from", required = false)
-            @ApiParam(value = "日期查询的起点(包含)", example = ServerConstants.AUTHORIZATION_HEADER)
-            String timeFrom,
+            @ApiParam(value = "日期查询的起点(包含)", example = ServerConstants.AUTHORIZATION_HEADER) String timeFrom,
             @PathVariable(value = "time-to", required = false)
             @ApiParam(value = "日期查询的终点(包含)", example = ServerConstants.AUTHORIZATION_HEADER) String timeTo,
             @PathVariable(value = "limit", required = false)
@@ -77,9 +79,6 @@ public class UserActionLogController {
         } catch (ParseException e) {
             throw new BadRequestException("错误的日期格式", e);
         }
-        return new Result<>(userActionLogService.queryByTime(
-                dateRange,
-                constantsInitializer.initPage(page, limit)
-        ));
+        return new Result<>(userActionLogService.queryByTime(dateRange, constantsInitializer.initPage(page, limit)));
     }
 }

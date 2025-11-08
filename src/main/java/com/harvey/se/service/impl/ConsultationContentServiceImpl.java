@@ -32,7 +32,8 @@ public class ConsultationContentServiceImpl extends
         ServiceImpl<ConsultationContentMapper, ConsultationContent> implements ConsultationContentService {
     @Override
     public ConsultationContentDto queryByUser(Long userId) {
-        return ConsultationContentDto.adapte(getById(userId));
+        ConsultationContent entity = getById(userId);
+        return entity == null ? ConsultationContentDto.DEFAULT : ConsultationContentDto.adapte(entity);
     }
 
     @Override

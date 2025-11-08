@@ -2,6 +2,7 @@ package com.harvey.se.advice;
 
 
 import com.harvey.se.exception.BadRequestException;
+import com.harvey.se.exception.ResourceNotFountException;
 import com.harvey.se.exception.UnauthorizedException;
 import com.harvey.se.exception.UncompletedException;
 import com.harvey.se.pojo.vo.Null;
@@ -55,5 +56,11 @@ public class WebExceptionAdvice {
     public Result<Null> handleUncompletedException(UncompletedException e) {
         log.error("uncompleted:", e);
         return new Result<>(500, "未完成的功能: " + e.getMessage());
+    }
+
+    @ExceptionHandler(ResourceNotFountException.class)
+    public Result<Null> handleResourceNotFountException(ResourceNotFountException e) {
+        log.warn("not found: {} ", e.getMessage());
+        return new Result<>(404, "未找到资源: " + e.getMessage());
     }
 }

@@ -1,0 +1,7 @@
+### 用户反馈
+POST http://{{host}}:8080/feedback/feedback
+Content-Type: application/json
+authorization: {{authorization}}
+Accept-Encoding: UTF-8
+
+"提交了一份测试, 意见Feedback"

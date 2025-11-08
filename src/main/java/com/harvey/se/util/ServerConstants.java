@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Set;
 
 /**
- * TODO
+ * 常量类
  *
  * @author <a href="mailto:harvey.blocks@outlook.com">Harvey Blocks</a>
  * @version 1.0

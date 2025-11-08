@@ -1,6 +1,7 @@
 package com.harvey.se.service.impl;
 
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.harvey.se.dao.GiftMapper;
@@ -66,15 +67,24 @@ public class GiftServiceImpl extends ServiceImpl<GiftMapper, Gift> implements Gi
     @Override
     public void consume(UserDto user, Long giftId) {
         // 1. 查询花费
-        Integer cost = new LambdaQueryChainWrapper<>(baseMapper).select(Gift::getCost)
+        Gift gift = new LambdaQueryChainWrapper<>(baseMapper).select(Gift::getCost, Gift::getStorage)
                 .eq(Gift::getId, giftId)
-                .one()
-                .getCost();
-        if (cost == null) {
+                .one();
+        if (gift == null) {
             throw new BadRequestException("do not exist gift: " + giftId);
         }
+        if (gift.getStorage() < 1) {
+            throw new BadRequestException("商品已售罄");
+        }
         // 2. 用户point减少
-        userService.increasePoint(user.getId(), user.getPoints(), -cost);
+        userService.increasePoint(user.getId(), user.getPoints(), -gift.getCost());
+        // 3. 使货物减少
+        boolean updated = new LambdaUpdateChainWrapper<>(baseMapper).set(Gift::getStorage, gift.getStorage() - 1)
+                .eq(Gift::getId, giftId)
+                .update();
+        if (!updated) {
+            log.warn("货物减少失败");
+        }
     }
 
     @Override
@@ -85,11 +95,14 @@ public class GiftServiceImpl extends ServiceImpl<GiftMapper, Gift> implements Gi
     @Override
     public List<GiftDto> queryByCost(IntRange intRange, Page<Gift> page) {
         return ServiceUtil.queryAndOrderWithInteger(
-                new LambdaQueryChainWrapper<>(baseMapper),
-                Gift::getCost,
-                intRange,
-                page
-        ).stream().map(GiftDto::adapte).collect(Collectors.toList());
+                        new LambdaQueryChainWrapper<>(baseMapper),
+                        Gift::getCost,
+                        intRange,
+                        page
+                )
+                .stream()
+                .map(GiftDto::adapte)
+                .collect(Collectors.toList());
     }
 
     @Override

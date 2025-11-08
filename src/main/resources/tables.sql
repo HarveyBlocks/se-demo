@@ -61,6 +61,18 @@ create table tb_user_action_log
     constraint tb_user_action_log_user_id_fk foreign key (user_id) references tb_user (id)
 ) comment '用户行为日志';
 
+
+create table tb_gift
+(
+    id           int8 primary key not null,
+    cost         int4             not null,
+    title        varchar(255)     not null default '',
+    description  TEXT             not null,
+    storage      int4             not null default 0,
+    picture_url1 varchar(255)     not null,
+    picture_url2 varchar(255)     not null,
+    picture_url3 varchar(255)     not null
+) comment '礼品表';
 -- 下面的不启用
 create table tb_item
 (

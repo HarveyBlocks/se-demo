@@ -40,7 +40,9 @@ public class AdminFeedbackController {
     @Resource
     private FeedbackService feedbackService;
 
-    @GetMapping(value = "/feedback-oldest/{time-from}/{time-to}/{limit}/{page}")
+    @GetMapping(value = {"/feedback-oldest/{time-from}/{time-to}/{limit}/{page}",
+            "/feedback-oldest/{time-from}/{time-to}/{limit}", "/feedback-oldest/{time-from}/{time-to}",
+            "/feedback-oldest/{time-from}", "/feedback-oldest",})
     @ApiOperation("查询一定时间内的未读的用户反馈")
     @ApiResponse(code = 200, message = "按照时间排序, 返回的时间顺序和参数的from-to一致")
     public Result<List<FeedbackDto>> getFeedbackDtoByTimeRange(
@@ -66,7 +68,9 @@ public class AdminFeedbackController {
         ));
     }
 
-    @GetMapping(value = "/read/feedback-latest/{time-from}/{time-to}/{limit}/{page}")
+    @GetMapping(value = {"/read/feedback-latest/{time-from}/{time-to}/{limit}/{page}",
+            "/read/feedback-latest/{time-from}/{time-to}/{limit}", "/read/feedback-latest/{time-from}/{time-to}",
+            "/read/feedback-latest/{time-from}", "/read/feedback-latest",})
     @ApiOperation("查询一定时间内的已读的用户反馈")
     @ApiResponse(code = 200, message = "按照时间排序, 返回的时间顺序和参数的from-to一致")
     public Result<List<FeedbackDto>> getReadFeedbackDtoByTimeRange(
@@ -88,7 +92,8 @@ public class AdminFeedbackController {
         return new Result<>(feedbackService.queryFeedback(dateRange, constantsInitializer.initPage(page, limit), true));
     }
 
-    @GetMapping(value = "/user/{user-id}/{read}/{limit}/{page}")
+    @GetMapping(value = {"/user/{user-id}/{read}/{limit}/{page}", "/user/{user-id}/{read}/{limit}",
+            "/user/{user-id}/{read}", "/user/{user-id}", "/user",})
     @ApiOperation("查询某一个特定用户的反馈")
     public Result<List<FeedbackDto>> getByUserId(
             @PathVariable(value = "user-id") @ApiParam(value = "用户id", required = true) Long userId,

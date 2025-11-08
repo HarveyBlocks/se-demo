@@ -3,7 +3,7 @@ package com.harvey.se.pojo.vo;
 import lombok.Data;
 
 /**
- * TODO
+ * 整型区间
  *
  * @author <a href="mailto:harvey.blocks@outlook.com">Harvey Blocks</a>
  * @version 1.0

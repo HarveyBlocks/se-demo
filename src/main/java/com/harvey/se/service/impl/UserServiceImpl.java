@@ -261,7 +261,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (userFieldMap.isEmpty()) {
             // Redis里没有数据
             log.debug("缓存不存在用户:" + userId);
-            String lockKey = RedisConstants.User.LOCK_KEY + UserHolder.currentUserId();
+            String lockKey = RedisConstants.User.LOCK_KEY + userId;
             return redissonLock.asynchronousLock(lockKey, () -> getFromDbAndWriteToCache(userId, key));
         } else if (((String) userFieldMap.get("id")).isEmpty()) {
             log.warn("Redis中存在的假数据" + userId);
@@ -400,8 +400,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (nextPoint < 0) {
             throw new BadRequestException("余额不足");
         }
-        boolean updated = super.update(new LambdaUpdateChainWrapper<>(baseMapper).set(User::getPoints, nextPoint)
-                .eq(User::getId, userId));
+        boolean updated = new LambdaUpdateChainWrapper<>(baseMapper).set(User::getPoints, nextPoint)
+                .eq(User::getId, userId).update();
         // 2. 删除缓存
         if (!updated) {
             throw new IllegalStateException(userId + "增加 point " + point + "失败!");
