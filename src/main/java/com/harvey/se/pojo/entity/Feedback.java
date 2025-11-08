@@ -39,8 +39,8 @@ public class Feedback {
     @TableField("create_time")
     private Date createTime;
 
-    @TableField("is_read")
-    private Boolean read;
+    @TableField("has_read")
+    private Boolean hasRead;
 
     public Feedback(FeedbackDto dto) {
         this(

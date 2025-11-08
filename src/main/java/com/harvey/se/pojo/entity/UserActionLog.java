@@ -48,15 +48,21 @@ public class UserActionLog {
     @TableField("request_time_cost")
     private Integer requestTimeCost;
 
-    public UserActionLog(UserActionLogDto dto) {
-        this(
+
+    @TableField("response_status_code")
+    private Integer responseStatusCode;
+
+
+    public UserActionLog adapte(UserActionLogDto dto) {
+        return new UserActionLog(
                 dto.getId(),
                 dto.getUserId(),
                 dto.getIpAddress(),
                 dto.getRequestUrl(),
                 dto.getRequestMethod(),
                 dto.getRequestTime(),
-                dto.getRequestTimeCost()
+                dto.getRequestTimeCost(),
+                dto.getResponseStatusCode()
         );
     }
 }

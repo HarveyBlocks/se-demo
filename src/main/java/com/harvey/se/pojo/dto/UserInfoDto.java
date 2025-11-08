@@ -48,13 +48,13 @@ public class UserInfoDto {
     /**
      * 创建时间
      */
-    @ApiModelProperty(value = "记录创建时间, 更新不生效")
+    @ApiModelProperty(value = "记录创建时间, 由系统决定")
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    @ApiModelProperty(value = "记录更新时间, 更新不生效")
+    @ApiModelProperty(value = "记录更新时间, 由系统决定")
     private LocalDateTime updateTime;
 
     /**

@@ -25,6 +25,8 @@ import java.util.Date;
 @ApiModel(description = "用户行为日志")
 public class UserActionLogDto {
 
+    public static final String REQUEST_START_TIME = "request-start-time";
+    public static final String RESPONSE_CODE_IN_RESULT = "response-code-in-result";
     @ApiModelProperty("主键, 系统自动生成")
     private Long id;
 
@@ -46,6 +48,8 @@ public class UserActionLogDto {
     @ApiModelProperty(value = "响应时间损耗, 单位ms")
     private Integer requestTimeCost;
 
+    @ApiModelProperty(value = "Http响应状态码")
+    private Integer responseStatusCode;
     public static UserActionLogDto adapte(UserActionLog entity) {
         if (entity == null) {
             throw new ResourceNotFountException("请求不存在的资源");
@@ -57,7 +61,8 @@ public class UserActionLogDto {
                 entity.getRequestUrl(),
                 entity.getRequestMethod(),
                 entity.getRequestTime(),
-                entity.getRequestTimeCost()
+                entity.getRequestTimeCost(),
+                entity.getResponseStatusCode()
         );
     }
 

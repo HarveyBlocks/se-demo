@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@Api(tags = "礼品查询")
+@Api(tags = "对礼品的查询和用户消费")
 @RequestMapping("/gift")
 @EnableConfigurationProperties(ConstantsProperties.class)
 public class GiftController {

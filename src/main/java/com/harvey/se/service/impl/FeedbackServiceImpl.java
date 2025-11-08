@@ -29,20 +29,19 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
 
     @Override
     public List<FeedbackDto> queryFeedback(DateRange dateRange, Page<Feedback> page, boolean read) {
-        LambdaQueryChainWrapper<Feedback> wrapper = new LambdaQueryChainWrapper<>(this.baseMapper).eq(
-                Feedback::getRead,
-                read
-        );
-        return ServiceUtil.queryAndOrderWithDate(wrapper, Feedback::getCreateTime, dateRange, page)
+        return ServiceUtil.queryAndOrderWithDate(new LambdaQueryChainWrapper<>(this.baseMapper).eq(
+                        Feedback::getHasRead,
+                        read
+                ), Feedback::getCreateTime, dateRange, page)
                 .stream()
                 .map(FeedbackDto::adapte)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<FeedbackDto> queryFeedback(Long userId, Page<Feedback> page, boolean read) {
+    public List<FeedbackDto> queryFeedback(Long userId, Page<Feedback> page, Boolean read) {
         return new LambdaQueryChainWrapper<>(this.baseMapper).eq(Feedback::getUserId, userId)
-                .eq(Feedback::getRead, read)
+                .eq(read != null, Feedback::getHasRead, read)
                 .page(page)
                 .getRecords()
                 .stream()
@@ -52,10 +51,7 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
 
     @Override
     public void read(Long id) {
-        boolean updated = new LambdaUpdateChainWrapper<>(baseMapper).set(
-                        Feedback::getRead,
-                        true
-                ) // 已读
+        boolean updated = new LambdaUpdateChainWrapper<>(baseMapper).set(Feedback::getHasRead, true) // 已读
                 .eq(Feedback::getId, id).update();
         if (!updated) {
             log.warn("未成功更新read");
@@ -65,7 +61,7 @@ public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> i
     @Override
     public void saveNew(Feedback feedback) {
         feedback.setId(null);
-        feedback.setRead(false);
+        feedback.setHasRead(false);
         boolean saved = super.save(feedback);
         if (!saved) {
             log.warn("保存反馈信息 {} 失败" + feedback);

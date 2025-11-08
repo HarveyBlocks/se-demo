@@ -1,0 +1,46 @@
+### 分页查询 limit-page
+< {%
+    request.variables.set("limit", "4")
+    request.variables.set("page", "1")
+%}
+GET http://{{host}}:8080/admin/user/all/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询 limit
+< {%
+    request.variables.set("limit", "4")
+%}
+GET http://{{host}}:8080/admin/user/all/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+### 分页查询
+GET http://{{host}}:8080/admin/user/all
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+### 根据ID查询
+< {%
+    request.variables.set("id", "1985757499214168065")
+%}
+GET http://{{host}}:8080/admin/user/one/{{id}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 更新信息
+PUT http://{{host}}:8080/admin/user/update
+Content-Type: application/json
+authorization: {{authorization}}
+
+{
+  "id": 1985757499214168065,
+  "phone": "18906901236",
+  "nickname": "HarveyBlocks",
+  "points": 100,
+  "createTime": "2025-11-05T01:14:15",
+  "updateTime": "2025-11-08T19:14:45",
+  "role": "ROOT"
+}

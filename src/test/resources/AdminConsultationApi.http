@@ -1,0 +1,71 @@
+### 热词查询 limit
+< {%
+    request.variables.set("limit", "4")
+%}
+GET http://{{host}}:8080/admin/consultation/hot-word/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询-limit-page
+< {%
+    request.variables.set("limit", "")
+    request.variables.set("page", "")
+%}
+GET http://{{host}}:8080/admin/consultation/all/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询-limit
+< {%
+    request.variables.set("limit", "")
+%}
+GET http://{{host}}:8080/admin/consultation/all/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询
+GET http://{{host}}:8080/admin/consultation/all
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+
+### 分页查询combine-limit-page
+< {%
+    request.variables.set("limit", "")
+    request.variables.set("page", "")
+%}
+GET http://{{host}}:8080/admin/consultation/combine/all/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询combine-limit
+< {%
+    request.variables.set("limit", "")
+%}
+GET http://{{host}}:8080/admin/consultation/combine/all/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页查询combine
+GET http://{{host}}:8080/admin/consultation/combine/all
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+
+### 根据ID查询
+< {%
+    request.variables.set("id", "1985757499214168065")
+%}
+GET http://{{host}}:8080/admin/consultation/combine/{{id}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 更新信息
+< {%
+    request.variables.set("user-id", "1985757499214168065")
+%}
+GET http://{{host}}:8080 /admin/consultation/user/{{user-id}}
+Content-Type: application/json
+authorization: {{authorization}}

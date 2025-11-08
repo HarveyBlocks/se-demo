@@ -35,7 +35,7 @@ create table tb_feedback
     id          int8 primary key not null,
     user_id     int8             not null default 0,
     text        varchar(255)     not null default '',
-    `read`      bool             not null default false comment '已读',
+    has_read bool not null default false comment '已读',
     create_time datetime         not null default NOW(),
     constraint tb_feedback_user_id_fk foreign key (user_id) references tb_user (id)
 ) comment '反馈';

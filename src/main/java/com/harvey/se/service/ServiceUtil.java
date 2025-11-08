@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.harvey.se.pojo.vo.DateRange;
 import com.harvey.se.pojo.vo.IntRange;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @version 1.0
  * @date 2025-11-08 09:03
  */
+@Slf4j
 public class ServiceUtil {
     private ServiceUtil() {
     }

@@ -1,0 +1,42 @@
+### 下架
+< {%
+    request.variables.set("id", "1987157178047586306")
+%}
+DELETE http://{{host}}:8080/admin/gift/delete/{{id}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+### 新增
+POST http://{{host}}:8080/admin/gift/insert
+Content-Type: application/json
+authorization: {{authorization}}
+
+{
+  "id": null,
+  "cost": 0,
+  "description": "",
+  "pictureUrl1": "",
+  "pictureUrl2": "",
+  "pictureUrl3": "",
+  "storage": 0,
+  "title": ""
+}
+
+
+### 更新
+PUT http://{{host}}:8080/admin/gift/update
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+{
+  "id": 1987156300418834433,
+  "cost": 100,
+  "description": "一个东西",
+  "pictureUrl1": "https://url/img/1",
+  "pictureUrl2": "https://url/img/2",
+  "pictureUrl3": "https://url/img/3",
+  "storage": 100,
+  "title": "礼品"
+}

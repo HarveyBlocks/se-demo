@@ -1,0 +1,70 @@
+### 分页-消耗查询-longer-limit-page
+< {%
+    request.variables.set("longer-than", "1000")
+    request.variables.set("limit", "3")
+    request.variables.set("page", "4")
+%}
+GET http://{{host}}:8080/admin/action/cost/{{longer-than}}/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页-消耗查询-longer-limit
+< {%
+    request.variables.set("longer-than", "1000")
+    request.variables.set("limit", "3")
+%}
+GET http://{{host}}:8080/admin/action/cost/{{longer-than}}/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页-消耗查询-longer
+< {%
+    request.variables.set("longer-than", "10000")
+%}
+GET http://{{host}}:8080/admin/action/cost/{{longer-than}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+
+### 分页-时间查询-from-to-limit-page
+< {%
+    request.variables.set("time-from", "2025-11-08 18:35:48")
+    request.variables.set("time-to", "2025-11-08 18:48:48")
+    request.variables.set("limit", "4")
+    request.variables.set("page", "2")
+%}
+GET http://{{host}}:8080/admin/action/request-time-latest/{{time-from}}/{{time-to}}/{{limit}}/{{page}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页-时间查询-from-to-limit
+< {%
+    request.variables.set("time-from", "2025-11-08 18:35:48")
+    request.variables.set("time-to", "2025-11-08 18:48:48")
+    request.variables.set("limit", "4")
+%}
+GET http://{{host}}:8080/admin/action/request-time-latest/{{time-from}}/{{time-to}}/{{limit}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页-时间查询-from-to
+< {%
+    request.variables.set("time-from", "2025-11-08 18:35:48")
+    request.variables.set("time-to", "2025-11-08 18:37:48")
+%}
+GET http://{{host}}:8080/admin/action/request-time-latest/{{time-from}}/{{time-to}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页-时间查询-from
+< {%
+    request.variables.set("time-from", "2025-11-08 18:35:48")
+%}
+GET http://{{host}}:8080/admin/action/request-time-latest/{{time-from}}
+Content-Type: application/json
+authorization: {{authorization}}
+
+### 分页-时间查询
+GET http://{{host}}:8080/admin/action/request-time-latest
+Content-Type: application/json
+authorization: {{authorization}}

@@ -41,8 +41,7 @@ public class UserActionLogController {
     @Resource
     private ConstantsInitializer constantsInitializer;
 
-    @GetMapping(value = {"/cost/{longer-than}/{limit}/{page}", "/cost/{longer-than}/{limit}", "/cost/{longer-than}",
-            "/cost"})
+    @GetMapping(value = {"/cost/{longer-than}/{limit}/{page}", "/cost/{longer-than}/{limit}", "/cost/{longer-than}"})
     @ApiOperation("查询请求消耗时间大于某段时长的请求记录")
     @ApiResponse(code = 200, message = "返回在从花费长到花费短")
     public Result<List<UserActionLogDto>> longCost(
@@ -65,9 +64,10 @@ public class UserActionLogController {
     @ApiResponse(code = 200, message = "按照时间排序, 返回的时间顺序和参数的from-to一致")
     public Result<List<UserActionLogDto>> getLatestActionByRequestTimeRange(
             @PathVariable(value = "time-from", required = false)
-            @ApiParam(value = "日期查询的起点(包含)", example = ServerConstants.AUTHORIZATION_HEADER) String timeFrom,
+            @ApiParam(value = "日期查询的起点(包含)", example = ServerConstants.DATE_TIME_FORMAT_STRING)
+            String timeFrom,
             @PathVariable(value = "time-to", required = false)
-            @ApiParam(value = "日期查询的终点(包含)", example = ServerConstants.AUTHORIZATION_HEADER) String timeTo,
+            @ApiParam(value = "日期查询的终点(包含)", example = ServerConstants.DATE_TIME_FORMAT_STRING) String timeTo,
             @PathVariable(value = "limit", required = false)
             @ApiParam(value = "页长", defaultValue = ServerConstants.DEFAULT_PAGE_SIZE) Integer limit,
             @PathVariable(value = "page", required = false) @ApiParam(value = "页号", defaultValue = "1")

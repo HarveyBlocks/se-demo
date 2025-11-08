@@ -47,7 +47,7 @@ public class FeedbackDto {
                 entity.getUserId(),
                 entity.getText(),
                 entity.getCreateTime(),
-                entity.getRead()
+                entity.getHasRead()
         );
     }
 }

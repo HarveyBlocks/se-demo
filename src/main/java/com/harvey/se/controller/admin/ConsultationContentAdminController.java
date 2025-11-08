@@ -76,9 +76,9 @@ public class ConsultationContentAdminController {
     }
 
 
-    @GetMapping(value = "/both/{id}")
+    @GetMapping(value = "/combine/{id}")
     @ApiOperation(value = "依据某一用户的ID查询该用户的用户信息和购车咨询信息")
-    public Result<ConsultationContentWithUserEntityDto> bothById(
+    public Result<ConsultationContentWithUserEntityDto> combineById(
             @PathVariable(value = "id") @ApiParam("用户id") Long userId) {
         // 不提供就使用默认值
         ConsultationContentDto consultationContentDto = consultationContentService.queryByUser(userId);
@@ -87,10 +87,10 @@ public class ConsultationContentAdminController {
     }
 
 
-    @GetMapping({"/both/all/{limit}/{page}", "/both/all/{limit}", "/both/all"})
-    @ApiOperation(value = "分页查询用户咨询")
+    @GetMapping({"/combine/all/{limit}/{page}", "/combine/all/{limit}", "/combine/all"})
+    @ApiOperation(value = "分页查询用户信息和咨询的联合信息")
     @ApiResponse(message = "包含用户信息和咨询信息", code = 200)
-    public Result<List<ConsultationContentWithUserEntityDto>> bothByPage(
+    public Result<List<ConsultationContentWithUserEntityDto>> combineByPage(
             @PathVariable(value = "limit", required = false)
             @ApiParam(value = "页长", defaultValue = ServerConstants.DEFAULT_PAGE_SIZE) Integer limit,
             @PathVariable(value = "page", required = false) @ApiParam(value = "页号", defaultValue = "1")
