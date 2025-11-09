@@ -1,7 +1,6 @@
 package com.harvey.se.interceptor;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.harvey.se.exception.BadRequestException;
 import com.harvey.se.pojo.dto.UserDto;
 import com.harvey.se.properties.ConstantsProperties;
 import com.harvey.se.service.UserService;
@@ -104,7 +103,7 @@ public class ExpireInterceptor implements HandlerInterceptor {
             log.error("id = " + id + " 访问次数太多了");
             //  经测试, 这个需要频率数在200QPS能触发28次左右(限制是同时7个)
             // 这种肯定是开挂了, 要不要加黑名单到里去?
-            throw new BadRequestException("request too much");
+            // TODO throw new BadRequestException("request too much");
         } else {
             stringRedisTemplate.opsForHash()
                     .increment(tokenKey, REQUEST_TIME_FIELD, -1);

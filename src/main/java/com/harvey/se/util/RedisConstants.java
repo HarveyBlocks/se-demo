@@ -30,4 +30,11 @@ public class RedisConstants {
         public static final Long LOGIN_CODE_TTL = 3 * 60L;
         public static final String POINTS_FIELD = "points";
     }
+
+    public static class Chat {
+        public static final String LOCK_KEY = LOCK_KEY_PRE + "chat:";
+        public static final String PIECE_QUEUE_KEY = CACHE_KEY_PRE + "chat:pieces:";
+        public static final String ID_GENERATOR = CACHE_KEY_PRE + "chat:id:";
+        public static final String MULTIPLY_LEFT_POP_LUA = "mul_left_pop.lua";
+    }
 }

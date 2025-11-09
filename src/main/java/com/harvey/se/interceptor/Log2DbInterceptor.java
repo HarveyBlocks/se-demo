@@ -64,13 +64,10 @@ public class Log2DbInterceptor implements HandlerInterceptor {
         if (status != 200) {
             return status;
         }
-        String statusObj = response.getHeader(UserActionLogDto.RESPONSE_CODE_IN_RESULT);
-        if (statusObj == null) {
-            return 200;
-        }
+        String statusStr = response.getHeader(UserActionLogDto.RESPONSE_CODE_IN_RESULT);
         try {
-            return Integer.parseInt(statusObj);
-        } catch (Exception ignore) {
+            return Integer.parseInt(statusStr);
+        } catch (Exception e) {
             return 200;
         }
     }

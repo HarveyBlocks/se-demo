@@ -107,8 +107,4 @@ create table tb_order
     constraint tb_order_item_id_fk foreign key (item_id) references tb_item (id),
     constraint tb_order_point_record_id_fk foreign key (point_record_id) references tb_point_record (id)
 ) comment '兑换记录(订单)';
-/*一次消费:
-  1. 生成tb_point_record
-  2. 生成order
-  3. 从user那里扣积分
-  */
+/*多轮对话, 需要存储用户-对话session表*/

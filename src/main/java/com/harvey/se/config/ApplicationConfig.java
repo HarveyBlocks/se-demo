@@ -1,7 +1,10 @@
 package com.harvey.se.config;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.harvey.se.properties.ChatProperties;
 import com.harvey.se.properties.ConstantsProperties;
+import com.harvey.se.util.JacksonUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -19,7 +22,7 @@ import javax.annotation.Resource;
  * @date 2024-01-21 21:13
  */
 @Configuration
-@EnableConfigurationProperties(ConstantsProperties.class)
+@EnableConfigurationProperties({ConstantsProperties.class, ChatProperties.class})
 public class ApplicationConfig {
     @Resource
     private ConstantsProperties constantsProperties;
@@ -34,6 +37,11 @@ public class ApplicationConfig {
                 .setPassword(constantsProperties.getRedisPassword());
         // 也可以使用config.useClusterServers()添加集群地址
         return Redisson.create(config);
+    }
+
+    @Bean
+    public JacksonUtil jacksonUtil() {
+        return new JacksonUtil(new ObjectMapper());
     }
 
 }
